@@ -113,7 +113,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": { "type": "integer" },
+            "schema": { "type": "string" },
             "description": "User ID"
           }
         ],
@@ -126,7 +126,7 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": { "type": "integer" },
+                    "id": { "type": "string" },
                     "username": { "type": "string" },
                     "email": { "type": "string" }
                   }
@@ -206,6 +206,32 @@
           }
         }
       }
+    },
+    "/api/UserGuides": {
+      "get": {
+        "tags": ["Guides"],
+        "summary": "Get all user guides",
+        "responses": {
+          "200": {
+            "description": "List of user guides",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "string", "description": "Guide UUID" },
+                      "user_id": { "type": "string", "description": "User UUID" },
+                      "guide": { "type": "string", "description": "Guide name" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "tags": [
@@ -216,6 +242,10 @@
     {
       "name": "User",
       "description": "User management routes"
+    },
+    {
+      "name": "Guides",
+      "description": "User guides managements"
     }
   ],
   "components": {

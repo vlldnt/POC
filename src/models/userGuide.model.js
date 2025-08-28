@@ -1,23 +1,17 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "./index.js";
 
-export const User = sequelize.define("User", {
+export const UserGuide = sequelize.define("UserGuide", {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
-  username: {
-    type: DataTypes.STRING,
+  user_id: {
+    type: DataTypes.INTEGER,
     allowNull: false,
-    unique: true,
   },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  password: {
+  guide: {
     type: DataTypes.STRING,
     allowNull: false,
   },

@@ -1,5 +1,9 @@
 import bcrypt from "bcrypt";
 import { User } from "../models/user.model.js";
+import { UserGuide } from "../models/userGuide.model.js";
+
+User.hasMany(UserGuide, { foreignKey: "user_id" });
+UserGuide.belongsTo(User, { foreignKey: "user_id" });
 
 
 // GET user by ID
