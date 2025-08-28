@@ -231,6 +231,50 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": ["Guides"],
+        "summary": "Add a guide for the authenticated user",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "guide": { "type": "string", "description": "Guide name" }
+                },
+                "required": ["guide"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Guide added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" },
+                    "userGuide": {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "string", "description": "Guide UUID" },
+                        "user_id": { "type": "string", "description": "User UUID" },
+                        "guide": { "type": "string", "description": "Guide name" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Guide name required" },
+          "401": { "description": "Unauthorized" }
+        }
       }
     }
   },
