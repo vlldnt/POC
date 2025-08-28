@@ -1,0 +1,45 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Environment variables
+.env
+.env.test
+.env.local
+.env.production
+
+# Build and cache
+dist/
+build/
+.cache/
+.next/
+coverage/
+
+# Editor & OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Swagger generated files (si tu en génères automatiquement)
+swagger.json
+swagger.yaml
+
+# Optional npm cache
+.npm
+
+# Docker
+docker-compose.override.yml
