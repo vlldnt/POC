@@ -6,114 +6,7 @@
     "description": "Documentation de l'API POC"
   },
   "paths": {
-    "/api/userGuides/{user_id}": {
-      "get": {
-        "tags": ["Guides"],
-        "summary": "Get guides by user_id",
-        "security": [{ "bearerAuth": [] }],
-        "parameters": [
-          {
-            "name": "user_id",
-            "in": "path",
-            "required": true,
-            "schema": { "type": "string" },
-            "description": "User UUID"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of guides for user_id",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": { "type": "string" },
-                      "user_id": { "type": "string" },
-                      "guide": { "type": "string" }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": { "description": "User not found" }
-        }
-      }
-    },
-    "/api/userGuides/guide/{guide}": {
-      "get": {
-        "tags": ["Guides"],
-        "summary": "Get guides by guide name",
-        "parameters": [
-          {
-            "name": "guide",
-            "in": "path",
-            "required": true,
-            "schema": { "type": "string" },
-            "description": "Guide name"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of guides for guide name",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": { "type": "string" },
-                      "user_id": { "type": "string" },
-                      "guide": { "type": "string" }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/userGuides/username/{user_name}": {
-      "get": {
-        "tags": ["Guides"],
-        "summary": "Get guides by user_name (no token)",
-        "parameters": [
-          {
-            "name": "user_name",
-            "in": "path",
-            "required": true,
-            "schema": { "type": "string" },
-            "description": "User name"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of guides for user_name",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": { "type": "string" },
-                      "user_id": { "type": "string" },
-                      "guide": { "type": "string" }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": { "description": "User not found" }
-        }
-      }
-    },
+
     "/api/auth/register": {
       "post": {
         "tags": ["Auth"],
@@ -384,6 +277,143 @@
               }
             }
           }
+        }
+      }
+    },
+    "/api/userGuides/{user_id}": {
+      "get": {
+        "tags": ["Guides"],
+        "summary": "Get guides by user_id",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "User UUID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of guides for user_id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "string" },
+                      "user_id": { "type": "string" },
+                      "guide": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": { "description": "User not found" }
+        }
+      }
+    },
+    "/api/userGuides/guide/{guide}": {
+      "get": {
+        "tags": ["Guides"],
+        "summary": "Get guides by guide name",
+        "parameters": [
+          {
+            "name": "guide",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "Guide name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of guides for guide name",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "string" },
+                      "user_id": { "type": "string" },
+                      "guide": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/userGuides/username/{user_name}": {
+      "get": {
+        "tags": ["Guides"],
+        "summary": "Get guides by user_name (no token)",
+        "parameters": [
+          {
+            "name": "user_name",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "User name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of guides for user_name",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "string" },
+                      "user_id": { "type": "string" },
+                      "guide": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": { "description": "User not found" }
+        }
+      }
+    },
+    "/api/userGuides/{user_id}/{guide_id}": {
+      "delete": {
+        "tags": ["Guides"],
+        "summary": "Delete a guide (only if user is owner)",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "User UUID (must match token)"
+          },
+          {
+            "name": "guide_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "Guide UUID"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Guide deleted" },
+          "403": { "description": "Forbidden: You can only delete your own guides." },
+          "404": { "description": "Guide not found or not yours" },
+          "401": { "description": "Unauthorized" }
         }
       }
     }

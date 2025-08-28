@@ -62,3 +62,27 @@ export const getAllGuides = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+
+// DELETE guide if user connected (TOken)
+export const deleteGuide = async (req, res) => {
+  const { user_id, guide_id } = req.params;
+  if (!req.user || req.user.id !== user_id) {
+    return res.status(403).json({ error: "Forbidden: You can only delete your own guides." });
+  }
+  try {
+    const deleted = await UserGuide.destroy({
+      where: {
+        id: guide_id,
+        user_id: user_id
+      }
+    });
+    if (deleted) {
+      res.json({ message: "Guide deleted" });
+    } else {
+      res.status(404).json({ error: "Guide not found or not yours" });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

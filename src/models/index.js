@@ -1,7 +1,6 @@
-import { Sequelize } from "sequelize";
+import { User } from "./user.model.js";
+import { UserGuide } from "./userGuide.model.js";
 
-export const sequelize = new Sequelize({
-  dialect: "sqlite",
-  storage: "./database.sqlite",
-  logging: false,
-});
+// Associations
+User.hasMany(UserGuide, { foreignKey: "user_id", onDelete: "CASCADE" });
+UserGuide.belongsTo(User, { foreignKey: "user_id" });
