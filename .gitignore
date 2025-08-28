@@ -35,7 +35,6 @@ Thumbs.db
 .idea/
 
 # Swagger generated files (si tu en génères automatiquement)
-swagger.json
 swagger.yaml
 
 # Optional npm cache

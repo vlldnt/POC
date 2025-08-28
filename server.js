@@ -3,6 +3,8 @@ import bodyParser from "body-parser";
 import { sequelize } from "./src/models/index.js";
 import authRoutes from "./src/routes/auth.routes.js";
 import userRoutes from "./src/routes/user.routes.js";
+import swaggerUi from "swagger-ui-express";
+import fs from "fs";
 
 const app = express();
 app.use(bodyParser.json());
@@ -28,6 +30,10 @@ app.use((req, res, next) => {
 // API routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
+
+const swaggerDocument = JSON.parse(fs.readFileSync("./swagger.json", "utf8"));
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const PORT = 3000;
 

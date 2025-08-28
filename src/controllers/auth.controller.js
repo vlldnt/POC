@@ -2,8 +2,22 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user.model.js";
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const usernameMaxLength = 20;
+const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
+  // Validation
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ error: "Invalid email format" });
+  }
+  if (!username || username.length > usernameMaxLength) {
+    return res.status(400).json({ error: "Username must be max 20 characters" });
+  }
+  if (!passwordRegex.test(password)) {
+    return res.status(400).json({ error: "Password must be at least 8 characters, contain one uppercase letter and one number" });
+  }
   try {
     const hashed = await bcrypt.hash(password, 10);
     const user = await User.create({ username, email, password: hashed });
@@ -26,7 +40,7 @@ export const login = async (req, res) => {
     if (!valid) return res.status(401).json({ error: "Invalid password" });
 
     const token = jwt.sign({ id: user.id, email: user.email }, "secretkey", {
-      expiresIn: "1h",
+      expiresIn: "7d",
     });
     res.json({ message: "Logged in", token });
   } catch (err) {
