@@ -4,6 +4,7 @@ import { sequelize } from "./src/models/sequelize.js";
 import authRoutes from "./src/routes/auth.routes.js";
 import userRoutes from "./src/routes/user.routes.js";
 import userGuidesRoutes from "./src/routes/userGuides.routes.js";
+import caughtRoutes from "./src/routes/caught.routes.js";
 import swaggerUi from "swagger-ui-express";
 import fs from "fs";
 import "./src/models/index.js";
@@ -33,6 +34,7 @@ app.use((req, res, next) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/userGuides", userGuidesRoutes)
+app.use("/api/caught", caughtRoutes)
 
 const swaggerDocument = JSON.parse(fs.readFileSync("./swagger.json", "utf8"));
 
