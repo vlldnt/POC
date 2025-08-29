@@ -1,4 +1,7 @@
 # Professor Oak Challenge
+Website with pokemon Professor Oak Challenge - Guides
+
+Guides made by [Mewlax84](https://www.reddit.com/r/ProfessorOak/comments/bj6yeh/professor_oak_challenge_guides/?show=original)
 
 ## Installation
 
