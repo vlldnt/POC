@@ -6,10 +6,11 @@
     "description": "Documentation de l'API POC"
   },
   "paths": {
-
     "/api/auth/register": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "Register a new user",
         "requestBody": {
           "required": true,
@@ -18,11 +19,22 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "username": { "type": "string" },
-                  "email": { "type": "string", "format": "email" },
-                  "password": { "type": "string" }
+                  "username": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
                 },
-                "required": ["username", "email", "password"]
+                "required": [
+                  "username",
+                  "email",
+                  "password"
+                ]
               }
             }
           }
@@ -39,7 +51,9 @@
     },
     "/api/auth/login": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "Login with email and password",
         "requestBody": {
           "required": true,
@@ -48,10 +62,17 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "email": { "type": "string" },
-                  "password": { "type": "string" }
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
                 },
-                "required": ["identifier", "password"]
+                "required": [
+                  "identifier",
+                  "password"
+                ]
               }
             }
           }
@@ -71,20 +92,36 @@
     },
     "/api/auth/verify": {
       "get": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "Verify JWT token",
-        "security": [{ "bearerAuth": [] }],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
-          "200": { "description": "Token is valid" },
-          "401": { "description": "Unauthorized / token invalid" }
+          "200": {
+            "description": "Token is valid"
+          },
+          "401": {
+            "description": "Unauthorized / token invalid"
+          }
         }
       }
     },
     "/api/user/": {
       "get": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Get current authenticated user",
-        "security": [{ "bearerAuth": [] }],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Authenticated user info",
@@ -93,32 +130,48 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": { "type": "integer" },
-                    "username": { "type": "string" },
-                    "email": { "type": "string" }
+                    "id": {
+                      "type": "integer"
+                    },
+                    "username": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
                   }
                 }
               }
             }
           },
-          "401": { "description": "Unauthorized" }
+          "401": {
+            "description": "Unauthorized"
+          }
         }
       }
     },
     "/api/user/{id}": {
       "get": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Get user by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": { "type": "string" },
+            "schema": {
+              "type": "string"
+            },
             "description": "User ID"
           }
         ],
-        "security": [{ "bearerAuth": [] }],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "User found",
@@ -127,21 +180,31 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": { "type": "string" },
-                    "username": { "type": "string" },
-                    "email": { "type": "string" }
+                    "id": {
+                      "type": "string"
+                    },
+                    "username": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
                   }
                 }
               }
             }
           },
-          "404": { "description": "User not found" }
+          "404": {
+            "description": "User not found"
+          }
         }
       }
     },
     "/api/user/all": {
       "get": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Get all users",
         "responses": {
           "200": {
@@ -153,9 +216,15 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": { "type": "integer" },
-                      "username": { "type": "string" },
-                      "email": { "type": "string" }
+                      "id": {
+                        "type": "integer"
+                      },
+                      "username": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
                     }
                   }
                 }
@@ -167,9 +236,15 @@
     },
     "/api/user": {
       "patch": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Update user profile",
-        "security": [{ "bearerAuth": [] }],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -177,9 +252,16 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "username": { "type": "string" },
-                  "email": { "type": "string", "format": "email" },
-                  "password": { "type": "string" }
+                  "username": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
                 }
               }
             }
@@ -195,9 +277,15 @@
         }
       },
       "delete": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Delete user account",
-        "security": [{ "bearerAuth": [] }],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Account deleted"
@@ -210,9 +298,15 @@
     },
     "/api/userGuides": {
       "post": {
-        "tags": ["Guides"],
+        "tags": [
+          "Guides"
+        ],
         "summary": "Add a guide for the authenticated user",
-        "security": [{ "bearerAuth": [] }],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -220,9 +314,14 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "guide": { "type": "string", "description": "Guide name" }
+                  "guide": {
+                    "type": "string",
+                    "description": "Guide name"
+                  }
                 },
-                "required": ["guide"]
+                "required": [
+                  "guide"
+                ]
               }
             }
           }
@@ -235,13 +334,24 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": { "type": "string" },
+                    "message": {
+                      "type": "string"
+                    },
                     "userGuide": {
                       "type": "object",
                       "properties": {
-                        "id": { "type": "string", "description": "Guide UUID" },
-                        "user_id": { "type": "string", "description": "User UUID" },
-                        "guide": { "type": "string", "description": "Guide name" }
+                        "id": {
+                          "type": "string",
+                          "description": "Guide UUID"
+                        },
+                        "user_id": {
+                          "type": "string",
+                          "description": "User UUID"
+                        },
+                        "guide": {
+                          "type": "string",
+                          "description": "Guide name"
+                        }
                       }
                     }
                   }
@@ -249,14 +359,20 @@
               }
             }
           },
-          "400": { "description": "Guide name required" },
-          "401": { "description": "Unauthorized" }
+          "400": {
+            "description": "Guide name required"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
         }
       }
     },
     "/api/UserGuides/all": {
       "get": {
-        "tags": ["Guides"],
+        "tags": [
+          "Guides"
+        ],
         "summary": "Get all user guides",
         "responses": {
           "200": {
@@ -268,9 +384,18 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": { "type": "string", "description": "Guide UUID" },
-                      "user_id": { "type": "string", "description": "User UUID" },
-                      "guide": { "type": "string", "description": "Guide name" }
+                      "id": {
+                        "type": "string",
+                        "description": "Guide UUID"
+                      },
+                      "user_id": {
+                        "type": "string",
+                        "description": "User UUID"
+                      },
+                      "guide": {
+                        "type": "string",
+                        "description": "Guide name"
+                      }
                     }
                   }
                 }
@@ -282,15 +407,23 @@
     },
     "/api/userGuides/{user_id}": {
       "get": {
-        "tags": ["Guides"],
+        "tags": [
+          "Guides"
+        ],
         "summary": "Get guides by user_id",
-        "security": [{ "bearerAuth": [] }],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "user_id",
             "in": "path",
             "required": true,
-            "schema": { "type": "string" },
+            "schema": {
+              "type": "string"
+            },
             "description": "User UUID"
           }
         ],
@@ -304,29 +437,41 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": { "type": "string" },
-                      "user_id": { "type": "string" },
-                      "guide": { "type": "string" }
+                      "id": {
+                        "type": "string"
+                      },
+                      "user_id": {
+                        "type": "string"
+                      },
+                      "guide": {
+                        "type": "string"
+                      }
                     }
                   }
                 }
               }
             }
           },
-          "404": { "description": "User not found" }
+          "404": {
+            "description": "User not found"
+          }
         }
       }
     },
     "/api/userGuides/guide/{guide}": {
       "get": {
-        "tags": ["Guides"],
+        "tags": [
+          "Guides"
+        ],
         "summary": "Get guides by guide name",
         "parameters": [
           {
             "name": "guide",
             "in": "path",
             "required": true,
-            "schema": { "type": "string" },
+            "schema": {
+              "type": "string"
+            },
             "description": "Guide name"
           }
         ],
@@ -340,9 +485,15 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": { "type": "string" },
-                      "user_id": { "type": "string" },
-                      "guide": { "type": "string" }
+                      "id": {
+                        "type": "string"
+                      },
+                      "user_id": {
+                        "type": "string"
+                      },
+                      "guide": {
+                        "type": "string"
+                      }
                     }
                   }
                 }
@@ -354,14 +505,18 @@
     },
     "/api/userGuides/username/{user_name}": {
       "get": {
-        "tags": ["Guides"],
+        "tags": [
+          "Guides"
+        ],
         "summary": "Get guides by user_name (no token)",
         "parameters": [
           {
             "name": "user_name",
             "in": "path",
             "required": true,
-            "schema": { "type": "string" },
+            "schema": {
+              "type": "string"
+            },
             "description": "User name"
           }
         ],
@@ -375,53 +530,142 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": { "type": "string" },
-                      "user_id": { "type": "string" },
-                      "guide": { "type": "string" }
+                      "id": {
+                        "type": "string"
+                      },
+                      "user_id": {
+                        "type": "string"
+                      },
+                      "guide": {
+                        "type": "string"
+                      }
                     }
                   }
                 }
               }
             }
           },
-          "404": { "description": "User not found" }
+          "404": {
+            "description": "User not found"
+          }
         }
       }
     },
     "/api/userGuides/{user_id}/{guide_id}": {
       "delete": {
-        "tags": ["Guides"],
+        "tags": [
+          "Guides"
+        ],
         "summary": "Delete a guide (only if user is owner)",
-        "security": [{ "bearerAuth": [] }],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "user_id",
             "in": "path",
             "required": true,
-            "schema": { "type": "string" },
+            "schema": {
+              "type": "string"
+            },
             "description": "User UUID (must match token)"
           },
           {
             "name": "guide_id",
             "in": "path",
             "required": true,
-            "schema": { "type": "string" },
+            "schema": {
+              "type": "string"
+            },
             "description": "Guide UUID"
           }
         ],
         "responses": {
-          "200": { "description": "Guide deleted" },
-          "403": { "description": "Forbidden: You can only delete your own guides." },
-          "404": { "description": "Guide not found or not yours" },
-          "401": { "description": "Unauthorized" }
+          "200": {
+            "description": "Guide deleted"
+          },
+          "403": {
+            "description": "Forbidden: You can only delete your own guides."
+          },
+          "404": {
+            "description": "Guide not found or not yours"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/caught/list/{guide_id}": {
+      "get": {
+        "tags": [
+          "Caught"
+        ],
+        "summary": "Get all Pokémon caught in a guide (owned by connected user)",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "guide_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Guide UUID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Pokémon IDs caught in the guide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "guide_id": {
+                      "type": "string"
+                    },
+                    "pokemons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "description": "Pokémon ID (format '001' à '151')"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Guide not found"
+          },
+          "403": {
+            "description": "Access denied to this guide"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
         }
       }
     },
     "/api/caught": {
       "post": {
-        "tags": ["Caught"],
+        "tags": [
+          "Caught"
+        ],
         "summary": "Add a caught Pokémon for the authenticated user and guide",
-        "security": [{ "bearerAuth": [] }],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -429,10 +673,19 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "guide_id": { "type": "string", "description": "Guide UUID" },
-                  "pokemon_id": { "type": "string", "description": "Pokémon ID (format '001' à '151')" }
+                  "guide_id": {
+                    "type": "string",
+                    "description": "Guide UUID"
+                  },
+                  "pokemon_id": {
+                    "type": "string",
+                    "description": "Pokémon ID (format '001' à '151')"
+                  }
                 },
-                "required": ["guide_id", "pokemon_id"]
+                "required": [
+                  "guide_id",
+                  "pokemon_id"
+                ]
               }
             }
           }
@@ -445,7 +698,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": { "type": "string" }
+                    "message": {
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -453,6 +708,67 @@
           },
           "400": {
             "description": "Validation error (missing fields, bad format, or already caught)"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Caught"
+        ],
+        "summary": "Delete a caught Pokémon for the authenticated user and guide",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "guide_id": {
+                    "type": "string",
+                    "description": "Guide UUID"
+                  },
+                  "pokemon_id": {
+                    "type": "string",
+                    "description": "Pokémon ID (format '001' à '151')"
+                  }
+                },
+                "required": [
+                  "guide_id",
+                  "pokemon_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pokémon deleted from guide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pokémon not found in guide"
+          },
+          "400": {
+            "description": "Validation error (missing fields, bad format)"
           },
           "401": {
             "description": "Unauthorized"
