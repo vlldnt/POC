@@ -416,6 +416,49 @@
           "401": { "description": "Unauthorized" }
         }
       }
+    },
+    "/api/caught": {
+      "post": {
+        "tags": ["Caught"],
+        "summary": "Add a caught Pokémon for the authenticated user and guide",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "guide_id": { "type": "string", "description": "Guide UUID" },
+                  "pokemon_id": { "type": "string", "description": "Pokémon ID (format '001' à '151')" }
+                },
+                "required": ["guide_id", "pokemon_id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Pokémon caught",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error (missing fields, bad format, or already caught)"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
     }
   },
   "tags": [
@@ -430,6 +473,10 @@
     {
       "name": "Guides",
       "description": "User guides managements"
+    },
+    {
+      "name": "Caught",
+      "description": "Pokémon caught management"
     }
   ],
   "components": {
