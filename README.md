@@ -18,7 +18,6 @@
 - **body-parser**: Parses incoming request bodies
 - **swagger-ui-express**: Swagger documentation UI
 - **swagger-jsdoc**: Swagger documentation generator
-- **dotenv**: Loads environment variables from `.env` (optional)
 - **nodemon**: Auto-reload for development (dev dependency)
 
 You can see all dependencies in your `package.json`.
