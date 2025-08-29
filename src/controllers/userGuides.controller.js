@@ -29,7 +29,9 @@ export const getAllGuides = async (req, res) => {
     // GET api/userGuides/:user_id with token
     if (req.user && paramUserId) {
       if (req.user.id !== paramUserId) {
-        return res.status(403).json({ error: "Forbidden: You can only access your own guides." });
+        return res
+          .status(403)
+          .json({ error: "Forbidden: You can only access your own guides." });
       }
       where.user_id = paramUserId;
     } else if (paramUserId) {
@@ -55,7 +57,7 @@ export const getAllGuides = async (req, res) => {
     }
     const guides = await UserGuide.findAll({
       attributes: ["id", "user_id", "guide"],
-      where
+      where,
     });
     res.json(guides);
   } catch (err) {
@@ -63,19 +65,20 @@ export const getAllGuides = async (req, res) => {
   }
 };
 
-
 // DELETE guide if user connected (TOken)
 export const deleteGuide = async (req, res) => {
   const { user_id, guide_id } = req.params;
   if (!req.user || req.user.id !== user_id) {
-    return res.status(403).json({ error: "Forbidden: You can only delete your own guides." });
+    return res
+      .status(403)
+      .json({ error: "Forbidden: You can only delete your own guides." });
   }
   try {
     const deleted = await UserGuide.destroy({
       where: {
         id: guide_id,
-        user_id: user_id
-      }
+        user_id: user_id,
+      },
     });
     if (deleted) {
       res.json({ message: "Guide deleted" });

@@ -6,6 +6,7 @@ import userRoutes from "./src/routes/user.routes.js";
 import userGuidesRoutes from "./src/routes/userGuides.routes.js";
 import swaggerUi from "swagger-ui-express";
 import fs from "fs";
+import "./src/models/index.js";
 
 const app = express();
 app.use(bodyParser.json());
@@ -40,6 +41,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 const PORT = 3000;
 
 sequelize.sync().then(() => {
+  console.log('Tables créées :', Object.keys(sequelize.models));
   app.listen(PORT, () => {
     console.log(`🚀 POC server running on http://localhost:${PORT}`);
   });
