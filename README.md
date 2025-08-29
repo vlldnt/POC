@@ -8,7 +8,8 @@
    cd POC
    ```
 
-2. **Install dependencies**
+## 2. Install dependencies
+    ```graphql
     ├── bcrypt@6.0.0                # Password hashing
     ├── body-parser@2.2.0           # Parses incoming request bodies
     ├── express@5.1.0               # Web framework for Node.js
@@ -18,6 +19,8 @@
     ├── sqlite3@5.1.7               # SQLite database driver
     ├── swagger-jsdoc@6.2.8         # Swagger documentation generator
     └── swagger-ui-express@5.0.1    # Swagger documentation
+    ```
+
    ```sh
    npm install
    ```
