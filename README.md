@@ -8,17 +8,20 @@
    cd POC
    ```
 
-## 2. Install dependencies
-    ```graphql
-    ├── bcrypt@6.0.0                # Password hashing
-    ├── body-parser@2.2.0           # Parses incoming request bodies
-    ├── express@5.1.0               # Web framework for Node.js
-    ├── jsonwebtoken@9.0.2          # JWT authentication
-    ├── nodemon@3.1.10              # Auto-reload for development
-    ├── sequelize@6.37.7            # SQL ORM for models and relations
-    ├── sqlite3@5.1.7               # SQLite database driver
-    ├── swagger-jsdoc@6.2.8         # Swagger documentation generator
-    └── swagger-ui-express@5.0.1    # Swagger documentation
+## 2. Dependencies
+
+- **express**: Web framework for Node.js
+- **sequelize**: SQL ORM for models and relations
+- **pg** / **mysql2** / **sqlite3**: Database driver (choose according to your DB)
+- **bcrypt**: Password hashing
+- **jsonwebtoken**: JWT authentication
+- **body-parser**: Parses incoming request bodies
+- **swagger-ui-express**: Swagger documentation UI
+- **swagger-jsdoc**: Swagger documentation generator
+- **dotenv**: Loads environment variables from `.env` (optional)
+- **nodemon**: Auto-reload for development (dev dependency)
+
+You can see all dependencies in your `package.json`.
     ```
 
    ```sh
