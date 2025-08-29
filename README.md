@@ -28,13 +28,13 @@ You can see all dependencies in your `package.json`.
    npm install
    ```
 3. **Run the server**
-   ```sh
-   npm start
-   ```
-   or for development with auto-reload:
-   ```sh
-   npm run dev
-   ```
+```sh
+npm start
+```
+or for development with auto-reload:
+```sh
+npm run dev
+```
 
 ## Features
 
