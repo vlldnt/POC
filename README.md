@@ -1,4 +1,4 @@
-# POC - Personal Project
+# Professor Oak Challenge
 
 ## Installation
 
