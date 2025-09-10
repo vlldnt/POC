@@ -40,11 +40,11 @@ const swaggerDocument = JSON.parse(fs.readFileSync("./swagger.json", "utf8"));
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-const PORT = 3000;
+const PORT = 5050;
 
 sequelize.sync().then(() => {
   console.log('Tables créées :', Object.keys(sequelize.models));
   app.listen(PORT, () => {
-    console.log(`🚀 POC server running on http://localhost:${PORT}`);
+    console.log(`🚀 POC server running on http://localhost:${PORT}/api-docs`);
   });
 });
