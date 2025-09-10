@@ -41,25 +41,36 @@ const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
 app.post("/users", async (req, res) => {
   const { username, email, password } = req.body;
   if (!username || username.length > usernameMaxLength) {
-    return res.status(400).json({ error: "Username must be max 20 characters" });
+    return res
+      .status(400)
+      .json({ error: "Username must be max 20 characters" });
   }
   if (!email || !emailRegex.test(email)) {
     return res.status(400).json({ error: "Invalid email format" });
   }
   if (!password || !passwordRegex.test(password)) {
-    return res.status(400).json({ error: "Password must be at least 8 characters, contain one uppercase letter and one number" });
+    return res
+      .status(400)
+      .json({
+        error:
+          "Password must be at least 8 characters, contain one uppercase letter and one number",
+      });
   }
   const hashed = await bcrypt.hash(password, 10);
   try {
     const user = await User.create({ username, email, password: hashed });
-    res.status(201).json({ id: user.id, username: user.username, email: user.email });
+    res
+      .status(201)
+      .json({ id: user.id, username: user.username, email: user.email });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
 
 app.get("/users/:id", async (req, res) => {
-  const user = await User.findByPk(req.params.id, { attributes: ["id", "username", "email"] });
+  const user = await User.findByPk(req.params.id, {
+    attributes: ["id", "username", "email"],
+  });
   if (!user) return res.status(404).json({ error: "User not found" });
   res.json(user);
 });
@@ -74,13 +85,20 @@ app.patch("/users/:id", async (req, res) => {
   if (!user) return res.status(404).json({ error: "User not found" });
   const { username, email, password } = req.body;
   if (username && username.length > usernameMaxLength) {
-    return res.status(400).json({ error: "Username must be max 20 characters" });
+    return res
+      .status(400)
+      .json({ error: "Username must be max 20 characters" });
   }
   if (email && !emailRegex.test(email)) {
     return res.status(400).json({ error: "Invalid email format" });
   }
   if (password && !passwordRegex.test(password)) {
-    return res.status(400).json({ error: "Password must be at least 8 characters, contain one uppercase letter and one number" });
+    return res
+      .status(400)
+      .json({
+        error:
+          "Password must be at least 8 characters, contain one uppercase letter and one number",
+      });
   }
   if (username) user.username = username;
   if (email) user.email = email;
@@ -109,7 +127,11 @@ describe("User API (ephemeral DB)", () => {
   test("Create user with valid data", async () => {
     const res = await request(app)
       .post("/users")
-      .send({ username: "adrien", email: "adrien@email.com", password: "Password1" });
+      .send({
+        username: "adrien",
+        email: "adrien@email.com",
+        password: "Password1",
+      });
     expect(res.statusCode).toBe(201);
     expect(res.body.username).toBe("adrien");
     userId = res.body.id;
@@ -126,7 +148,11 @@ describe("User API (ephemeral DB)", () => {
   test("Fail to create user with short password", async () => {
     const res = await request(app)
       .post("/users")
-      .send({ username: "adrien3", email: "adrien3@email.com", password: "pass" });
+      .send({
+        username: "adrien3",
+        email: "adrien3@email.com",
+        password: "pass",
+      });
     expect(res.statusCode).toBe(400);
     expect(res.body.error).toMatch(/Password must be/);
   });
@@ -145,37 +171,37 @@ describe("User API (ephemeral DB)", () => {
     expect(res.body.username).toBe("adrienUpdated");
   });
 
-    test("Update with invalid username (too long)", async () => {
-      const res = await request(app)
-        .patch(`/users/${userId}`)
-        .send({ username: "a".repeat(21) });
-      expect(res.statusCode).toBe(400);
-      expect(res.body.error).toMatch(/Username must be max 20 characters/);
-    });
+  test("Update with invalid username (too long)", async () => {
+    const res = await request(app)
+      .patch(`/users/${userId}`)
+      .send({ username: "a".repeat(21) });
+    expect(res.statusCode).toBe(400);
+    expect(res.body.error).toMatch(/Username must be max 20 characters/);
+  });
 
-    test("Update with invalid email format", async () => {
-      const res = await request(app)
-        .patch(`/users/${userId}`)
-        .send({ email: "bademail" });
-      expect(res.statusCode).toBe(400);
-      expect(res.body.error).toMatch(/Invalid email format/);
-    });
+  test("Update with invalid email format", async () => {
+    const res = await request(app)
+      .patch(`/users/${userId}`)
+      .send({ email: "bademail" });
+    expect(res.statusCode).toBe(400);
+    expect(res.body.error).toMatch(/Invalid email format/);
+  });
 
-    test("Update with invalid password format", async () => {
-      const res = await request(app)
-        .patch(`/users/${userId}`)
-        .send({ password: "nopass" });
-      expect(res.statusCode).toBe(400);
-      expect(res.body.error).toMatch(/Password must be at least 8 characters/);
-    });
+  test("Update with invalid password format", async () => {
+    const res = await request(app)
+      .patch(`/users/${userId}`)
+      .send({ password: "nopass" });
+    expect(res.statusCode).toBe(400);
+    expect(res.body.error).toMatch(/Password must be at least 8 characters/);
+  });
 
-    test("Update with invalid user id", async () => {
-      const res = await request(app)
-        .patch(`/users/invalid-id-1234`)
-        .send({ username: "test" });
-      expect(res.statusCode).toBe(404);
-      expect(res.body.error).toMatch(/User not found/);
-    });
+  test("Update with invalid user id", async () => {
+    const res = await request(app)
+      .patch(`/users/invalid-id-1234`)
+      .send({ username: "test" });
+    expect(res.statusCode).toBe(404);
+    expect(res.body.error).toMatch(/User not found/);
+  });
 
   test("Delete user", async () => {
     const res = await request(app).delete(`/users/${userId}`);
